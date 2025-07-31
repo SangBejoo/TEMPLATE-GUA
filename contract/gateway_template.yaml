@@ -1,0 +1,19 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    # Existing base endpoints
+    - selector: base.Base.HealthCheck
+      get: /v1/health
+    - selector: base.NotesService.CreateNote
+      post: /v1/notes
+      body: "*"
+    - selector: base.NotesService.GetNotes
+      get: /v1/notes
+    - selector: base.NotesService.UpdateNote
+      put: /v1/notes/{id}
+      body: "*"
+    - selector: base.NotesService.DeleteNote
+      delete: /v1/notes/{id}
+

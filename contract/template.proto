@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option go_package = "github.com/SangBejoo/Template/gen/proto/base";
+package base;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+
+service Base {
+    rpc HealthCheck(google.protobuf.Empty) returns (MessageStatusResponse){};
+}
+service NotesService {
+    rpc CreateNote(NotesRequest) returns (NotesResponse){};
+    rpc GetNotes(google.protobuf.Empty) returns (NotesResponse){};
+    rpc UpdateNote(UpdateNoteRequest) returns (NotesResponse){};
+    rpc DeleteNote(DeleteNoteRequest) returns (MessageStatusResponse){};
+}
+message MessageStatusResponse{
+    string message = 1;
+    string status = 2;
+}
+message Notes {
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
+message NotesRequest {
+    Notes note = 1;
+}
+message NotesResponse {
+    repeated Notes notes = 1;
+}
+message DeleteNoteRequest {
+    int32 id = 1;
+}
+message UpdateNoteRequest {
+    int32 id = 1;
+    string title = 2;
+    string content = 3;
+}
+message GetNotesRequest {
+    int32 id = 1;
+}
